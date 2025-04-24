@@ -16,7 +16,7 @@
         // execução da query
         $resultados = $ligacao->query("SELECT * FROM frutos")->fetchAll(PDO::FETCH_OBJ);
     } catch (PDOException $e) {
-        $erro = "Aconteceu um erro na ligação";
+        $erro = "Aconteceu um erro na Conexão";
     }
 
     // fechar a ligação
