@@ -23,12 +23,12 @@ mas desta vez com a execução da query de uma forma diferente.
     
     <form action="index_2.php" method="post">
         <div>
-            <label for="Usuario">Username</label>
-            <input type="text" name="usuario">
+            <label for="username">Username</label>
+            <input type="text" name="username">
         </div>
         <div>
-            <label for="Senha">Password</label>
-            <input type="text" name="senha">
+            <label for="password">Password</label>
+            <input type="text" name="password">
         </div>
         <div>
             <input type="submit" value="Entrar">

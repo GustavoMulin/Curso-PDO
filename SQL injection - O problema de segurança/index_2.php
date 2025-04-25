@@ -2,8 +2,6 @@
 
 // dados de ligação
 
-use function PHPSTORM_META\sql_injection_subst;
-
 $database = 'udemy_loja_online';
 $username = 'root';
 

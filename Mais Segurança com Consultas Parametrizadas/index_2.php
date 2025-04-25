@@ -10,11 +10,11 @@ $username = 'root';
 $ligacao = new PDO("mysql:host=localhost;dbname=$database", $username);
 
 $parametros = [
-    ':u' => $_POST['usuario'],
-    ':p' => $_POST['senha']
+    ':u' => $_POST['username'],
+    ':p' => $_POST['password']
 ];
 
-$comando = $ligacao->prepare("SELECT * FROM usuarios WHERE username = :u AND senha = :p");
+$comando = $ligacao->prepare("SELECT * FROM usuarios WHERE username = :u AND passwrd = :p");
 $comando->execute($parametros);
 $resultados = $comando->fetchAll(PDO::FETCH_OBJ);
 
@@ -29,4 +29,3 @@ if(count($resultados) == 0) {
 
 // vamos testar a expressão ' or ''=' no campo da password
 // já não vamos ter o problema anterior
-?>
