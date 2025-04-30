@@ -15,7 +15,7 @@ $database = new Database(MYSQL_CONFIG);
 
 // verifique se há uma postagem na pesquisa
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    
+
     // resultados da pesquisa
     $search = $_POST['text_search'];
     $params = [
@@ -25,6 +25,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 } else {
     $results = $database->execute_query("SELECT * FROM contactos ORDER BY id DESC");
 }
+
+$contatos = $results->results;
+$total_contatos = $results->affected_rows;
+
 ?>
 
 <!-- pesquisar e adicionar novo -->
@@ -49,36 +53,42 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 <!-- mostrar tabela de contato -->
 <div class="row">
     <div class="col">
+        <?php if($total_contatos == 0): ?>
+            <!-- sem resultados -->
+            <p class="text-center opacity-75 mt-3">Não foram encontrados contatos registados.</p>
+        <?php else:?>
+            <!-- resultados -->
+            <table class="table table-sm table-striped table-bordered">
+                <thead class="bg-dark text-white">
+                    <tr>
+                        <th width="40%">Nome</th>
+                        <th width="30%">Telefone</th>
+                        <th width="15%"></th>
+                        <th width="15%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($contatos as $contato): ?>
+                    <tr>
+                        <td><?= $contato->nome ?></td>
+                        <td><?- $contato->telefone ?></td>
+                        <td class="text-center"><a href="editar_contato.php?id=<?= $contato->id?>">Editar</a></td>
+                        <td class="text-center"><a href="eliminar_contato.php?id=<?= $contato->id?>">Eliminar</a></td>
+                    </tr>
+                    <?php endforeach;?>
+                </tbody>
+            </table>
 
-        <!-- sem resultados -->
-        <p class="text-center opacity-75 mt-3">Não foram encontrados contatos registados.</p>
-
-        <!-- resultados -->
-        <table class="table table-sm table-striped table-bordered">
-            <thead class="bg-dark text-white">
-                <tr>
-                    <th width="40%">Nome</th>
-                    <th width="30%">Telefone</th>
-                    <th width="15%"></th>
-                    <th width="15%"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>[nome]</td>
-                    <td>[telefone]</td>
-                    <td class="text-center"><a href="editar_contato.php">Editar</a></td>
-                    <td class="text-center"><a href="eliminar_contato.php">Eliminar</a></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <!-- resultados totais e excluir tudo -->
-        <div class="row">
-            <div class="col">
-                <p>Total: <strong>0</strong></p>
+            <!-- resultados totais -->
+            <div class="row">
+                <div class="col">
+                    <p>Total: <strong><?= $total_contatos ?></strong></p>
+                </div>
             </div>
-        </div>
+        <?php endif;?>
+        
+
+
 
     </div>
 </div>

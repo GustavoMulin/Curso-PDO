@@ -1,5 +1,43 @@
 <?php
+
+use sys4soft\Database;
+
 require_once('header.php');
+
+require_once('config.php');
+require_once('libraries/Database.php');
+
+$erro = null;
+
+// verifique se houve um post
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $database = new Database(MYSQL_CONFIG);
+
+    // Obter dados do post
+    $nome = $_POST['text_nome'];
+    $telefone = $_POST['text_telefone'];
+
+    // verifique se o telefone já está registrado
+    $params = [
+        ':telefone' => $telefone
+    ];
+    $results = $database->execute_query("SELECT id FROM contactos WHERE telefone = :telefone", $params);
+
+    if($results->affected_rows != 0) { 
+    // já existe outro contato com o mesmo telefone
+    $erro = 'Já outro contato com o mesmo número de telefone.';
+    } else {
+        // armazenar o contato no banco de dados
+        $params = [
+            ':nome' => $nome,
+            ':telefone' => $telefone
+        ];
+        $results = $database->execute_non_query("INSERT INTO contactos VALUES(0, :nome, :telefone, NOW(), NOW())", $params);
+
+        header('Location: index.php');
+    }
+}
 ?>
 
 <div class="row justify-content-center">
