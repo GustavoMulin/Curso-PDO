@@ -1,11 +1,30 @@
 <?php
+
+use sys4soft\Database;
+
 require_once('header.php');
 
 // inclua os arquivos necessários
 require_once('config.php');
 require_once('libraries/Database.php');
 
+$contatos = null;
+$total_contatos = 0;
+$search = null;
+$database = new Database(MYSQL_CONFIG);
+
 // verifique se há uma postagem na pesquisa
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    
+    // resultados da pesquisa
+    $search = $_POST['text_search'];
+    $params = [
+        ':search' => '%' . $search . '%'
+    ];
+    $results = $database->execute_query("SELECT * FROM contactos WHERE nome LIKE :search OR telefone LIKE :search ORDER BY id DESC", $params);
+} else {
+    $results = $database->execute_query("SELECT * FROM contactos ORDER BY id DESC");
+}
 ?>
 
 <!-- pesquisar e adicionar novo -->
