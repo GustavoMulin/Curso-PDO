@@ -71,7 +71,7 @@ $total_contatos = $results->affected_rows;
                     <?php foreach($contatos as $contato): ?>
                     <tr>
                         <td><?= $contato->nome ?></td>
-                        <td><?- $contato->telefone ?></td>
+                        <td><?= $contato->telefone ?></td>
                         <td class="text-center"><a href="editar_contato.php?id=<?= $contato->id?>">Editar</a></td>
                         <td class="text-center"><a href="eliminar_contato.php?id=<?= $contato->id?>">Eliminar</a></td>
                     </tr>

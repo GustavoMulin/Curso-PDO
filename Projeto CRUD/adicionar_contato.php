@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if($results->affected_rows != 0) { 
     // já existe outro contato com o mesmo telefone
-    $erro = 'Já outro contato com o mesmo número de telefone.';
+    $erro = 'Já existe outro contato com o mesmo número de telefone.';
     } else {
         // armazenar o contato no banco de dados
         $params = [
@@ -64,9 +64,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
 
         <!-- error message -->
-        <div class="mt-3 alert alert-danger p-2 text-center">
-            mensagem de erro aqui...
-        </div>
+         <?php if(!empty($erro)): ?>
+
+            <div class="mt-3 alert alert-danger p-2 text-center">
+                <?= $erro ?>
+            </div>
+
+         <?php endif;?>
 
     </div>
 </div>
