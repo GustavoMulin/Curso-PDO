@@ -64,11 +64,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 <p class="text-center"><strong>EDITAR CONTATOS</strong></p>
                 <div class="mb-3">
                     <label for="text_nome" class="form-label">Nome</label>
-                    <input type="text" name="text_nome" id="text_nome" class="form-control" minlength="3" maxlength="50" required value=" <?= $contato->nome ?> ">
+                    <input type="text" name="text_nome" id="text_nome" class="form-control" minlength="3" maxlength="50" required value="<?=$contato->nome ?>">
                 </div>
                 <div class="mb-3">
                     <label for="text_telefone" class="form-label">Telefone</label>
-                    <input type="text" name="text_telefone" id="text_telefone" class="form-control" minlength="3" maxlength="12" required value=" <?= $contato->telefone ?> ">
+                    <input type="text" name="text_telefone" id="text_telefone" class="form-control" minlength="3" maxlength="12" required value="<?=$contato->telefone?>">
                 </div>
                 <div class="text-center">
                     <a href="index.php" class="btn btn-outline-dark">Cancelar</a>
