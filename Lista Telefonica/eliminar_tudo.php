@@ -1,5 +1,18 @@
 <?php
+
+use sys4soft\Database;
+
 require_once('header.php');
+
+require_once('config.php');
+require_once('libraries/Database.php');
+
+// verifique se delete_all está presente na url
+if(!empty($_GET['delete_all'])){
+    $database = new Database(MYSQL_CONFIG);
+    $results = $database->execute_non_query("DELETE FROM contactos");
+    header('Location: index.php');
+}
 ?>
 
 <div class="row">
