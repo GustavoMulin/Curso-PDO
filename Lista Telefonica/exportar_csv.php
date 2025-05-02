@@ -37,11 +37,25 @@ foreach($rows as $row) {
 fclose($file);
 
 // dowload do ficheiro
+//Essa linha diz ao navegador que o conteúdo que vem a seguir é uma transferência de arquivo.
 header('Content-Description: File Transfer');
+
+// Isso define o tipo de conteúdo como binário genérico.
 header('Content-Type: application/octet-stream');
+
+// Essa linha força o download e define o nome do arquivo que será baixado.
 header('Content-Disposition: attachment; filename=' . $filename . '"');
+
+// Diz ao navegador que o arquivo não deve ser guardado em cache.
+// Ou seja, sempre que acessar, será baixado de novo.
 header('Expires: 0');
+
+// Exige que o navegador revalide com o servidor antes de usar qualquer versão em cache.
 header('cache-control: must-revalidate');
+
+// Compatibilidade antiga: permite o uso de cache por navegadores mais antigos.
 header('pragma: public');
+
+// Define o tamanho do arquivo (em bytes), o que ajuda o navegador a exibir a barra de progresso corretamente.
 header('Content-lenght: ' . filesize($filename));
 readfile($filename);
