@@ -41,6 +41,7 @@ fclose($file);
 header('Content-Description: File Transfer');
 
 // Isso define o tipo de conteúdo como binário genérico.
+// Significa: “Não tente interpretar o tipo do arquivo, apenas baixe-o”.
 header('Content-Type: application/octet-stream');
 
 // Essa linha força o download e define o nome do arquivo que será baixado.
