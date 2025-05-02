@@ -47,7 +47,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             ':nome' => $nome,
             ':telefone' => $telefone
         ];
-        $result = $database->execute_non_query("UPDATE contacts SET nome = :nome, telefone = :telefone, updated_at = NOW() WHERE id = :id", $params);
+        $result = $database->execute_non_query("UPDATE contactos SET nome = :nome, telefone = :telefone, updated_at = NOW() WHERE id = :id", $params);
 
         header('Location: index.php');
     }
@@ -60,7 +60,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         <div class="card p-4">
 
-            <form action="editar_contato.php" method="post">
+            <form action="editar_contato.php?id=<?= $id ?>" method="post">
                 <p class="text-center"><strong>EDITAR CONTATOS</strong></p>
                 <div class="mb-3">
                     <label for="text_nome" class="form-label">Nome</label>
